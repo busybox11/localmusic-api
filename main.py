@@ -20,7 +20,7 @@ def get_ping():
 def get_playing_state():
 	# Initialize player to last MPRIS client
 	uri = next(get_players_uri())
-	player = Player(dbus_interface_info={'dbus_uri': "org.mpris.MediaPlayer2.spotify"})
+	player = Player(dbus_interface_info={'dbus_uri': uri})
 
 	# Mandatory fields declaration
 	playing_state["title"] = str(player.Metadata[player.Metadata.TITLE])
