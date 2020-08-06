@@ -36,12 +36,12 @@ Returns a JSON element similar to this one:
 ## Config
 Currently, all the config is stored in `config.py`. You can edit this file to meet your needs.
 
-### `ignore_chrome_mpris`
+### `IGNORE_CHROME_MPRIS`
 **Boolean**, default: `True`
 
 Ignore Chrome MPRIS player.
 
-### `debug`
+### `DEBUG`
 **Boolean**, default: `True`
 
 Enable debug mode on Flask.

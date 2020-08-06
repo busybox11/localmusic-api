@@ -1,10 +1,10 @@
-import config
-
 from flask import Flask, json
 
 from dbus.mainloop.glib import DBusGMainLoop
 from mpris2 import get_players_uri
 from mpris2 import Player
+
+import config
 
 DBusGMainLoop(set_as_default=True)
 
@@ -23,7 +23,7 @@ def get_playing_state():
     # Get MPRIS client
     for player in get_players_uri():
         # If the config specifies to ignore Chrome MPRIS
-        if config.ignore_chrome_mpris == True:
+        if config.IGNORE_CHROME_MPRIS == True:
             # If the first MPRIS client is a Chrome instance
             if player.startswith('org.mpris.MediaPlayer2.chrome'):
                 continue
@@ -67,4 +67,4 @@ def get_playing_state():
 # Initialize API on host 0.0.0.0 and port 5175
 # If you want to debug using Flask, edit the config file
 if __name__ == '__main__':
-    api.run(host='0.0.0.0', port=5175, debug=config.debug)
+    api.run(host='0.0.0.0', port=5175, debug=config.DEBUG)
