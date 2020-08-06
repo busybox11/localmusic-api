@@ -1,2 +1,34 @@
-# localmusic_api
-A Python Flask REST API to retrieve currently playing local music 
+# localmusic-api
+A Python3 Flask REST API to retrieve currently playing local music 
+
+## Dependencies
+```
+python3
+Flask
+dbus
+mpris2
+```
+
+## How to use?
+Clone the repo, install all the python dependencies using `pip3`, and launch the server using `python3 main.py`.
+It only works with Linux (dbus' MPRIS) for now, but a Win32 compatibility is to come.
+
+The webserver will now be available at the local address (e.g. `localhost`, `127.0.0.1`, `0.0.0.0`) with the port `5175`.
+
+## Endpoints
+### `GET /ping`
+Pong
+
+### `GET /playing_state`
+Returns a JSON element similar to this one:
+```JSON
+{
+  "album": "a modern tragedy vol. 2",
+  "artist": "grandson",
+  "artwork": "https://o.scdn.co/image/ab67616d00001e0298561ed4bf6615bfc788bfcc",
+  "length": "198693000",
+  "position": "3435700",
+  "title": "Apologize"
+}
+```
+**Notice**: The elements `artwork`, `length` and `position` are present **only** if the current player supports it!
