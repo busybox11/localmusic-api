@@ -1,0 +1,1 @@
+ignore_chrome_mpris = True

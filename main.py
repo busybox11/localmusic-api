@@ -1,3 +1,5 @@
+import config
+
 from flask import Flask, json
 
 from dbus.mainloop.glib import DBusGMainLoop
