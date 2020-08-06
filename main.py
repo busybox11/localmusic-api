@@ -65,6 +65,6 @@ def get_playing_state():
 	return json.dumps(playing_state)
 
 # Initialize API on host 0.0.0.0 and port 5175
-# If you want to debug using Flask, just append debug=true to the list of arguments
+# If you want to debug using Flask, edit the config file
 if __name__ == '__main__':
-	api.run(host='0.0.0.0', port=5175)
+	api.run(host='0.0.0.0', port=5175, debug=config.debug)
