@@ -20,8 +20,19 @@ def get_ping():
 # Route for playing endpoint
 @api.route('/playing_state', methods=['GET'])
 def get_playing_state():
-	# Initialize player to last MPRIS client
-	uri = next(get_players_uri())
+	# Get MPRIS client
+	for player in get_players_uri():
+		# If the config specifies to ignore Chrome MPRIS
+		if config.ignore_chrome_mpris == True:
+			# If the first MPRIS client is a Chrome instance
+			if player.startswith('org.mpris.MediaPlayer2.chrome'):
+				continue
+
+		# Set the MPRIS uri to the active element
+		uri = player
+		break
+
+	# Initialize player with URI
 	player = Player(dbus_interface_info={'dbus_uri': uri})
 
 	# Mandatory fields declaration
