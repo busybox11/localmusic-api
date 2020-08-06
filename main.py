@@ -43,7 +43,8 @@ def get_playing_state():
 	
 	# Try to add song position to the playing_state object
 	try:
-		playing_state["position"] = str(player.Position)
+		if str(player.Position) != "0":
+			playing_state["position"] = str(player.Position)
 	except:
 		pass
 
