@@ -32,19 +32,18 @@ def get_playing_state():
         break
 
     # Initialize player with URI
-    player = Player(dbus_interface_info={'dbus_uri': uri})
+    player = Player(dbus_interface_info={'dbus_uri': uri}) # pylint: disable=unexpected-keyword-arg
 
-    # Mandatory fields declaration
-    playing_state["title"] = str(player.Metadata[player.Metadata.TITLE])
-    playing_state["artist"] = str(player.Metadata[player.Metadata.ARTIST][0])
-    playing_state["album"] = str(player.Metadata[player.Metadata.ALBUM])
-
-    # Try to add all additional fields to the playing_state object
-    additional_endpoints = ["ART_URI", "LENGTH"]
-    add_end_var = ["artwork", "length"]
-    for endpoint in additional_endpoints:
-        end_var = add_end_var[additional_endpoints.index(endpoint)]
+    # Try to add all fields to the playing_state object
+    endpoints = ["TITLE", "ARTIST", "ALBUM", "ART_URI", "LENGTH"]
+    ends_var = ["title", "artist", "album", "artwork", "length"]
+    for endpoint in endpoints:
+        end_var = ends_var[endpoints.index(endpoint)]
         try:
+            if endpoint == "ARTIST":
+                playing_state[end_var] = str(player.Metadata[getattr(player.Metadata, endpoint)][0])
+                continue
+
             playing_state[end_var] = str(player.Metadata[getattr(player.Metadata, endpoint)])
 
             # Workaround to get working Spotify covers URL
