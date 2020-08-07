@@ -25,13 +25,14 @@ Returns a JSON element similar to this one:
 {
   "album": "a modern tragedy vol. 2",
   "artist": "grandson",
-  "artwork": "https://o.scdn.co/image/ab67616d00001e0298561ed4bf6615bfc788bfcc",
+  "artwork": "https://i.scdn.co/image/ab67616d00001e0298561ed4bf6615bfc788bfcc",
   "length": "198693000",
-  "position": "3435700",
-  "title": "Apologize"
+  "position": "3435000",
+  "title": "Apologize",
+  "uri": "org.mpris.MediaPlayer2.spotify"
 }
 ```
-**Notice**: All **track** elements except `album`, `artist` and `title` are optional.
+**Notice**: All **track** elements except `album`, `artist`, `title` and `uri` are optional.
 
 All time elements are strings and in microseconds. 
 
