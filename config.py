@@ -1,3 +1,5 @@
 IGNORE_CHROME_MPRIS = True
 
+HOST = "127.0.0.1"
+PORT = 5175
 DEBUG = True
