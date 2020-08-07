@@ -31,7 +31,7 @@ Returns a JSON element similar to this one:
   "title": "Apologize"
 }
 ```
-**Notice**: The elements `artwork`, `length` and `position` are present **only** if the current player supports it!
+**Notice**: All **track** elements except `album`, `artist` and `title` are optional.
 
 All time elements are strings and in microseconds. 
 
