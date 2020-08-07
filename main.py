@@ -37,6 +37,9 @@ def get_playing_state():
     except:
         return json.dumps(playing_state), 504
 
+    # Add URI to playing_state
+    playing_state["uri"] = uri
+
     # Try to add all fields to the playing_state object of the Metadata of the player
     endpoints_meta = ["TITLE", "ARTIST", "ALBUM", "ART_URI", "LENGTH"]
     ends_var_meta = ["title", "artist", "album", "artwork", "length"]
@@ -56,8 +59,8 @@ def get_playing_state():
             pass
 
     # Try to add all fields to the playing_state object of the player
-    endpoints_player = ["Position", "PlaybackStatus"]
-    ends_var_player = ["position", "status"]
+    endpoints_player = ["Position", "PlaybackStatus", "Volume"]
+    ends_var_player = ["position", "status", "volume"]
     for endpoint in endpoints_player:
         end_var = ends_var_player[endpoints_player.index(endpoint)]
         try:
@@ -74,4 +77,4 @@ def get_playing_state():
 # Initialize API on host 0.0.0.0 and port 5175
 # If you want to debug using Flask, edit the config file
 if __name__ == '__main__':
-    api.run(host='0.0.0.0', port=5175, debug=config.DEBUG)
+    api.run(host=config.HOST, port=config.PORT, debug=config.DEBUG)
