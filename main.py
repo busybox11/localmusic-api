@@ -37,11 +37,11 @@ def get_playing_state():
     except:
         return json.dumps(playing_state), 504
 
-    # Try to add all fields to the playing_state object
-    endpoints = ["TITLE", "ARTIST", "ALBUM", "ART_URI", "LENGTH"]
-    ends_var = ["title", "artist", "album", "artwork", "length"]
-    for endpoint in endpoints:
-        end_var = ends_var[endpoints.index(endpoint)]
+    # Try to add all fields to the playing_state object of the Metadata of the player
+    endpoints_meta = ["TITLE", "ARTIST", "ALBUM", "ART_URI", "LENGTH"]
+    ends_var_meta = ["title", "artist", "album", "artwork", "length"]
+    for endpoint in endpoints_meta:
+        end_var = ends_var_meta[endpoints_meta.index(endpoint)]
         try:
             if endpoint == "ARTIST":
                 playing_state[end_var] = str(player.Metadata[getattr(player.Metadata, endpoint)][0])
@@ -55,12 +55,18 @@ def get_playing_state():
         except:
             pass
 
-    # Try to add song position to the playing_state object
-    try:
-        if str(player.Position) != "0":
-            playing_state["position"] = str(player.Position)
-    except:
-        pass
+    # Try to add all fields to the playing_state object of the player
+    endpoints_player = ["Position", "PlaybackStatus"]
+    ends_var_player = ["position", "status"]
+    for endpoint in endpoints_player:
+        end_var = ends_var_player[endpoints_player.index(endpoint)]
+        try:
+            if str(player.Position) == "0":
+                continue
+
+            playing_state[end_var] = str(getattr(player, endpoint))
+        except:
+            pass
 
     # Return a stringified JSON object
     return json.dumps(playing_state)
