@@ -1,8 +1,7 @@
 from flask import Flask, json
 
 from dbus.mainloop.glib import DBusGMainLoop
-from mpris2 import get_players_uri
-from mpris2 import Player
+from mpris2 import get_players_uri, Player
 
 import config
 
@@ -23,7 +22,7 @@ def get_playing_state():
     # Get MPRIS client
     for player in get_players_uri():
         # If the config specifies to ignore Chrome MPRIS
-        if config.IGNORE_CHROME_MPRIS == True:
+        if config.IGNORE_CHROME_MPRIS:
             # If the first MPRIS client is a Chrome instance
             if player.startswith('org.mpris.MediaPlayer2.chrome'):
                 continue
@@ -53,7 +52,7 @@ def get_playing_state():
                 playing_state[end_var] = playing_state[end_var].replace('open.spotify.com', 'o.scdn.co')
         except:
             pass
-    
+
     # Try to add song position to the playing_state object
     try:
         if str(player.Position) != "0":

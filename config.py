@@ -1,3 +1,3 @@
-ignore_chrome_mpris = True
+IGNORE_CHROME_MPRIS = True
 
-debug = True
+DEBUG = True
