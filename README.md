@@ -4,6 +4,7 @@ A Python3 Flask REST API to retrieve currently playing local music
 ## Dependencies
 ```
 python3
+subprocess
 Flask
 dbus
 mpris2
