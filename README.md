@@ -27,13 +27,22 @@ Returns a JSON element similar to this one:
   "album": "a modern tragedy vol. 2",
   "artist": "grandson",
   "artwork": "https://i.scdn.co/image/ab67616d00001e0298561ed4bf6615bfc788bfcc",
+  "config": [
+    {
+      "canPause": "1",
+      "canPlay": "1",
+      "canSeek": "1"
+    }
+  ],
   "length": "198693000",
   "position": "3435000",
+  "status": "Playing",
   "title": "Apologize",
   "uri": "org.mpris.MediaPlayer2.spotify"
 }
 ```
-**Notice**: All **track** elements except `album`, `artist`, `title` and `uri` are optional.
+**Notice**: All **track-related** elements except `album`, `artist`, `title` and `uri` are optional, **except** if the player is blank, then the API will only return the URI.
+The **config** element is always present.
 
 All time elements are strings and in microseconds. 
 
