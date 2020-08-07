@@ -33,6 +33,8 @@ Returns a JSON element similar to this one:
 ```
 **Notice**: The elements `artwork`, `length` and `position` are present **only** if the current player supports it!
 
+All time elements are strings and in microseconds. 
+
 ## Config
 Currently, all the config is stored in `config.py`. You can edit this file to meet your needs.
 
