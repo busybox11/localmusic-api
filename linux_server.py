@@ -70,6 +70,17 @@ def get_playing_state():
             playing_state[end_var] = str(getattr(player, endpoint))
         except:
             pass
+    
+    # Add all player abilities to the playing_state object
+    playing_state["config"] = [{}]
+    configs_player = ["CanPause", "CanPlay", "CanSeek"]
+    conf_var_player = ["canPause", "canPlay", "canSeek"]
+    for config_item in configs_player:
+        conf_var = conf_var_player[configs_player.index(config_item)]
+        try:
+            playing_state["config"][0][conf_var] = str(getattr(player, config_item))
+        except:
+            pass
 
     # Return a stringified JSON object
     return json.dumps(playing_state)
