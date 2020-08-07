@@ -35,6 +35,8 @@ Returns a JSON element similar to this one:
 
 All time elements are strings and in microseconds. 
 
+If there is no MPRIS players available, the API will return a `504 GATEWAY TIMEOUT` with a blank JSON. (`{}`)
+
 ## Config
 Currently, all the config is stored in `config.py`. You can edit this file to meet your needs.
 
