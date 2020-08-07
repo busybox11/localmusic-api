@@ -54,7 +54,7 @@ def get_playing_state():
 
             # Workaround to get working Spotify covers URL
             if endpoint == "ART_URI" and "open.spotify.com" in str(playing_state[end_var]):
-                playing_state[end_var] = playing_state[end_var].replace('open.spotify.com', 'o.scdn.co')
+                playing_state[end_var] = playing_state[end_var].replace('open.spotify.com', 'i.scdn.co')
         except:
             pass
 
