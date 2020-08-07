@@ -13,7 +13,7 @@ mpris2
 Clone the repo, install all the python dependencies using `pip3`, and launch the server using `python3 main.py`.
 It only works with Linux (dbus' MPRIS) for now, but a Win32 compatibility is to come.
 
-The webserver will now be available at the local address (e.g. `localhost`, `127.0.0.1`, `0.0.0.0`) with the port `5175`.
+The webserver will now be available at the local address (e.g. `localhost`, `127.0.0.1`) with the port `5175` by default.
 
 ## Endpoints
 ### `GET /ping`
@@ -44,6 +44,16 @@ Currently, all the config is stored in `config.py`. You can edit this file to me
 **Boolean**, default: `True`
 
 Ignore Chrome MPRIS player.
+
+### `HOST`
+**String**, default: `127.0.0.1`
+
+The host domain / IP of the API.
+
+### `PORT`
+**Integer**, default: `5175`
+
+The port of the API.
 
 ### `DEBUG`
 **Boolean**, default: `True`
