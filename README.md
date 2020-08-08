@@ -48,17 +48,27 @@ All time elements are strings and in microseconds.
 
 If there is no MPRIS players available, the API will return a `504 GATEWAY TIMEOUT` with a blank JSON.
 
-### `POST /control/next`
+## Control endpoints
+All control endpoints have the following response:
+
+**On success**: `HTTP CODE 201` with JSON `{"success": true}`.
+
+**On error**: `HTTP CODE 502` with JSON `{"success": false}`.
+
+### `POST /control/next`, no request body
 Go to the next song.
 
-**On success**: `HTTP CODE 201` with JSON `{"success": true}`.
-**On error**: `HTTP CODE 502` with JSON `{"success": false}`.
-
-### `POST /control/previous`
+### `POST /control/previous`, no request body
 Go back the previous song.
 
-**On success**: `HTTP CODE 201` with JSON `{"success": true}`.
-**On error**: `HTTP CODE 502` with JSON `{"success": false}`.
+### `POST /control/play`, no request body
+Play / resume the previous song.
+
+### `POST /control/pause`, no request body
+Pause the previous song.
+
+### `POST /control/playpause`, no request body
+Play / resume or pause the previous song, based on the current playback state.
 
 ## Config
 Currently, all the config is stored in `config.py`. You can edit this file to meet your needs.
