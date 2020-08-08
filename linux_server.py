@@ -70,7 +70,7 @@ def get_playing_state():
             playing_state[end_var] = str(getattr(player, endpoint))
         except:
             pass
-    
+
     # Add all player abilities to the playing_state object
     playing_state["config"] = [{}]
     configs_player = ["CanPause", "CanPlay", "CanSeek"]
@@ -78,7 +78,7 @@ def get_playing_state():
     for config_item in configs_player:
         conf_var = conf_var_player[configs_player.index(config_item)]
         try:
-            playing_state["config"][0][conf_var] = str(getattr(player, config_item))
+            playing_state["config"][0][conf_var] = bool(getattr(player, config_item))
         except:
             pass
 

@@ -29,9 +29,9 @@ Returns a JSON element similar to this one:
   "artwork": "https://i.scdn.co/image/ab67616d00001e0298561ed4bf6615bfc788bfcc",
   "config": [
     {
-      "canPause": "1",
-      "canPlay": "1",
-      "canSeek": "1"
+      "canPause": true,
+      "canPlay": true,
+      "canSeek": true
     }
   ],
   "length": "198693000",
@@ -42,7 +42,7 @@ Returns a JSON element similar to this one:
 }
 ```
 **Notice**: All elements are optional, **except** the URI.
-The **config** element is always present. "1" stands for `true`, whereas "0" stands for `false`.
+The **config** element is always present.
 
 All time elements are strings and in microseconds. 
 
