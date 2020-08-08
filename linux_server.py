@@ -115,6 +115,39 @@ def previous_song():
     except:
         return json.dumps({"success": False}), 502
 
+@api.route('/control/play', methods=['POST'])
+def resume_song():
+    init_player()
+
+    try:
+        player.Play()
+
+        return json.dumps({"success": True}), 201
+    except:
+        return json.dumps({"success": False}), 502
+
+@api.route('/control/pause', methods=['POST'])
+def pause_song():
+    init_player()
+
+    try:
+        player.Pause()
+
+        return json.dumps({"success": True}), 201
+    except:
+        return json.dumps({"success": False}), 502
+
+@api.route('/control/playpause', methods=['POST'])
+def playpause_song():
+    init_player()
+
+    try:
+        player.PlayPause()
+
+        return json.dumps({"success": True}), 201
+    except:
+        return json.dumps({"success": False}), 502
+
 # Initialize API on host 0.0.0.0 and port 5175
 # If you want to debug using Flask, edit the config file
 api.run(host=config.HOST, port=config.PORT, debug=config.DEBUG)
