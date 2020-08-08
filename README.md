@@ -35,14 +35,14 @@ Returns a JSON element similar to this one:
     }
   ],
   "length": "198693000",
-  "position": "3435000",
+  "position": "45371000",
   "status": "Playing",
   "title": "Apologize",
   "uri": "org.mpris.MediaPlayer2.spotify"
 }
 ```
-**Notice**: All **track-related** elements except `album`, `artist`, `title` and `uri` are optional, **except** if the player is blank, then the API will only return the URI.
-The **config** element is always present.
+**Notice**: All elements are optional, **except** the URI.
+The **config** element is always present. "1" stands for `true`, whereas "0" stands for `false`.
 
 All time elements are strings and in microseconds. 
 
