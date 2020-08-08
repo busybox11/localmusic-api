@@ -46,7 +46,19 @@ The **config** element is always present.
 
 All time elements are strings and in microseconds. 
 
-If there is no MPRIS players available, the API will return a `504 GATEWAY TIMEOUT` with a blank JSON. (`{}`)
+If there is no MPRIS players available, the API will return a `504 GATEWAY TIMEOUT` with a blank JSON.
+
+### `POST /control/next`
+Go to the next song.
+
+**On success**: `HTTP CODE 201` with JSON `{"success": true}`.
+**On error**: `HTTP CODE 502` with JSON `{"success": false}`.
+
+### `POST /control/previous`
+Go back the previous song.
+
+**On success**: `HTTP CODE 201` with JSON `{"success": true}`.
+**On error**: `HTTP CODE 502` with JSON `{"success": false}`.
 
 ## Config
 Currently, all the config is stored in `config.py`. You can edit this file to meet your needs.

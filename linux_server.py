@@ -5,11 +5,35 @@ from mpris2 import get_players_uri, Player
 
 import config
 
+uri = None
+player = None
+
 playing_state = {}
 
 DBusGMainLoop(set_as_default=True)
 
 api = Flask(__name__)
+
+def init_player():    
+    try:
+        # Get MPRIS client
+        for client in get_players_uri():
+            # If the config specifies to ignore Chrome MPRIS
+            if config.IGNORE_CHROME_MPRIS:
+                # If the first MPRIS client is a Chrome instance
+                if client.startswith('org.mpris.MediaPlayer2.chrome'):
+                    continue
+
+            # Set the MPRIS uri to the active element
+            global uri
+            uri = client
+            break
+
+        # Initialize player with URI
+        global player
+        player = Player(dbus_interface_info={'dbus_uri': uri}) # pylint: disable=unexpected-keyword-arg
+    except:
+        return json.dumps(playing_state), 504
 
 # Route for Ping endpoint
 @api.route('/ping', methods=['GET'])
@@ -19,23 +43,7 @@ def get_ping():
 # Route for playing endpoint
 @api.route('/playing_state', methods=['GET'])
 def get_playing_state():
-    try:
-        # Get MPRIS client
-        for player in get_players_uri():
-            # If the config specifies to ignore Chrome MPRIS
-            if config.IGNORE_CHROME_MPRIS:
-                # If the first MPRIS client is a Chrome instance
-                if player.startswith('org.mpris.MediaPlayer2.chrome'):
-                    continue
-
-            # Set the MPRIS uri to the active element
-            uri = player
-            break
-
-        # Initialize player with URI
-        player = Player(dbus_interface_info={'dbus_uri': uri}) # pylint: disable=unexpected-keyword-arg
-    except:
-        return json.dumps(playing_state), 504
+    init_player()
 
     # Add URI to playing_state
     playing_state["uri"] = uri
@@ -84,6 +92,28 @@ def get_playing_state():
 
     # Return a stringified JSON object
     return json.dumps(playing_state)
+
+@api.route('/control/next', methods=['POST'])
+def next_song():
+    init_player()
+
+    try:
+        player.Next()
+
+        return json.dumps({"success": True}), 201
+    except:
+        return json.dumps({"success": False}), 502
+
+@api.route('/control/previous', methods=['POST'])
+def previous_song():
+    init_player()
+
+    try:
+        player.Previous()
+
+        return json.dumps({"success": True}), 201
+    except:
+        return json.dumps({"success": False}), 502
 
 # Initialize API on host 0.0.0.0 and port 5175
 # If you want to debug using Flask, edit the config file
