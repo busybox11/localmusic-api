@@ -5,8 +5,8 @@ from mpris2 import get_players_uri, Player
 
 import config
 
-uri = None
-player = None
+uri = None # pylint: disable=invalid-name
+player = None # pylint: disable=invalid-name
 
 playing_state = {}
 
@@ -14,7 +14,7 @@ DBusGMainLoop(set_as_default=True)
 
 api = Flask(__name__)
 
-def init_player():    
+def init_player():
     try:
         # Get MPRIS client
         for client in get_players_uri():
@@ -25,12 +25,12 @@ def init_player():
                     continue
 
             # Set the MPRIS uri to the active element
-            global uri
+            global uri # pylint: disable=invalid-name
             uri = client
             break
 
         # Initialize player with URI
-        global player
+        global player # pylint: disable=invalid-name
         player = Player(dbus_interface_info={'dbus_uri': uri}) # pylint: disable=unexpected-keyword-arg
     except:
         return json.dumps(playing_state), 504

@@ -4,7 +4,8 @@ disable=
     C0116, # missing-function-docstring
     C0301, # line-too-long
     W0702, # bare-except
-    E1136 # unsubscriptable-object
+    E1136, # unsubscriptable-object
+    W0603  # global-statement
 
 ignored-modules=
     dbus,
