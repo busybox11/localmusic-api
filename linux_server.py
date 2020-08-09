@@ -48,14 +48,17 @@ def init_player():
         global player # pylint: disable=invalid-name
         player = Player(dbus_interface_info={'dbus_uri': uri}) # pylint: disable=unexpected-keyword-arg
 
+        # Everything worked, the player has been successfully initialized
         return True
     except:
+        # Something went wrong, the player has not been initialized
+        # TODO: Return information about the error
         return False
 
 # Route for API info endpoint
 @api.route('/api_info', methods=['GET'])
 def get_api_info():
-    # Return a stringified JSON object
+    # Return a stringified JSON object from the output of the function
     return json.dumps(api_info_update())
 
 # Route for Ping endpoint
@@ -66,7 +69,7 @@ def get_ping():
 # Route for playing endpoint
 @api.route('/playing_state', methods=['GET'])
 def get_playing_state():
-    if not init_player():
+    if not init_player(): # If the player cannot be initialized
         return json.dumps(playing_state), 504
 
     # Add URI and platform to playing_state
