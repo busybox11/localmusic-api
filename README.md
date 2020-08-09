@@ -36,15 +36,15 @@ Returns a JSON element similar to this one:
   ],
   "length": "198693000",
   "position": "45371000",
+  "platform": "Linux",
   "status": "Playing",
   "title": "Apologize",
   "uri": "org.mpris.MediaPlayer2.spotify"
 }
 ```
-**Notice**: All elements are optional, **except** the URI.
-The **config** element is always present.
+**Notice**: All elements are optional, **except** the `uri`, `platform` and `config`.
 
-All time elements are strings and in microseconds. 
+All time elements are microseconds strings. 
 
 If there is no MPRIS players available, the API will return a `504 GATEWAY TIMEOUT` with a blank JSON.
 

@@ -47,8 +47,9 @@ def get_ping():
 def get_playing_state():
     init_player()
 
-    # Add URI to playing_state
+    # Add URI and platform to playing_state
     playing_state["uri"] = uri
+    playing_state["platform"] = "Linux"
 
     # Try to add all fields to the playing_state object of the Metadata of the player
     endpoints_meta = ["TITLE", "ARTIST", "ALBUM", "ART_URI", "LENGTH"]
