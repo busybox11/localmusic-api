@@ -34,8 +34,10 @@ def init_player():
         # Initialize player with URI
         global player # pylint: disable=invalid-name
         player = Player(dbus_interface_info={'dbus_uri': uri}) # pylint: disable=unexpected-keyword-arg
+
+        return True
     except:
-        return json.dumps(playing_state), 504
+        return False
 
 # Route for Ping endpoint
 @api.route('/ping', methods=['GET'])
@@ -45,7 +47,8 @@ def get_ping():
 # Route for playing endpoint
 @api.route('/playing_state', methods=['GET'])
 def get_playing_state():
-    init_player()
+    if not init_player():
+        return json.dumps(playing_state), 504
 
     # Add URI and platform to playing_state
     playing_state["uri"] = uri
