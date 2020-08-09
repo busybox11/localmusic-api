@@ -5,16 +5,29 @@ from flask import Flask, json
 from dbus.mainloop.glib import DBusGMainLoop
 from mpris2 import get_players_uri, Player
 
+import platform
+
 import config
 
 uri = None # pylint: disable=invalid-name
 player = None # pylint: disable=invalid-name
 
+api_info = {}
 playing_state = {}
 
 DBusGMainLoop(set_as_default=True)
 
 api = Flask(__name__)
+
+def api_info_update():
+    temp_api_info = {}
+    temp_api_info["platform"] = platform.system()
+    temp_api_info["version"] = config.VERSION
+    temp_api_info["python_version"] = platform.python_version()
+
+    global api_info # pylint: disable=invalid-name
+    api_info = temp_api_info
+    return api_info
 
 def init_player():
     try:
@@ -38,6 +51,12 @@ def init_player():
         return True
     except:
         return False
+
+# Route for API info endpoint
+@api.route('/api_info', methods=['GET'])
+def get_api_info():
+    # Return a stringified JSON object
+    return json.dumps(api_info_update())
 
 # Route for Ping endpoint
 @api.route('/ping', methods=['GET'])

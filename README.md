@@ -17,11 +17,27 @@ It only works with Linux (dbus' MPRIS) for now, but a Win32 compatibility is to 
 The webserver will now be available at the local address (e.g. `localhost`, `127.0.0.1`) with the port `5175` by default.
 
 ## Endpoints
+### `GET /api_info`
+Returns the API information in a JSON element similar to this one:
+```JSON
+{
+  "platform": "Linux",
+  "python_version": "3.8.4",
+  "version": "v0.4"
+}
+```
+
+**`platform`**: Current OS platform of the API.
+
+**`python_version`**: Version of Python which is being used by the API.
+
+**`version`**: Current version of the API.
+
 ### `GET /ping`
 Pong
 
 ### `GET /playing_state`
-Returns a JSON element similar to this one:
+Returns the current playing state in a JSON element similar to this one:
 ```JSON
 {
   "album": "a modern tragedy vol. 2",
