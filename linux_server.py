@@ -51,9 +51,10 @@ def init_player():
         # Everything worked, the player has been successfully initialized
         return True
     except:
+        e = sys.exc_info()[0]
         # Something went wrong, the player has not been initialized
-        # TODO: Return information about the error
-        return False
+        # Returns information about the error
+        return e
 
 # Route for API info endpoint
 @api.route('/api_info', methods=['GET'])
