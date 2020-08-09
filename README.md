@@ -39,7 +39,8 @@ Returns a JSON element similar to this one:
   "platform": "Linux",
   "status": "Playing",
   "title": "Apologize",
-  "uri": "org.mpris.MediaPlayer2.spotify"
+  "uri": "org.mpris.MediaPlayer2.spotify",
+  "volume": "1.0"
 }
 ```
 **Notice**: All elements are optional, **except** the `uri`, `platform` and `config`.
