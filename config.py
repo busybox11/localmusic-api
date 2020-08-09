@@ -1,3 +1,5 @@
+VERSION = "v0.4"
+
 IGNORE_CHROME_MPRIS = True
 
 HOST = "127.0.0.1"
