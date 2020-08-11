@@ -6,6 +6,7 @@ from dbus.mainloop.glib import DBusGMainLoop
 from mpris2 import get_players_uri, Player
 
 import platform
+import sys
 
 import config
 
