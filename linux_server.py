@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 
-from flask import Flask, json
+from flask import Flask, json, Response
 
 from dbus.mainloop.glib import DBusGMainLoop
 from mpris2 import get_players_uri, Player
@@ -60,7 +60,7 @@ def init_player():
 @api.route('/api_info', methods=['GET'])
 def get_api_info():
     # Return a stringified JSON object from the output of the function
-    return json.dumps(api_info_update())
+    return Response(json.dumps(api_info_update()), mimetype='application/json')
 
 # Route for Ping endpoint
 @api.route('/ping', methods=['GET'])
@@ -71,7 +71,7 @@ def get_ping():
 @api.route('/playing_state', methods=['GET'])
 def get_playing_state():
     if not init_player(): # If the player cannot be initialized
-        return json.dumps(playing_state), 504
+        return Response(json.dumps(playing_state), mimetype='application/json', status=504)
 
     # Add URI and platform to playing_state
     playing_state["uri"] = uri
@@ -120,7 +120,7 @@ def get_playing_state():
             pass
 
     # Return a stringified JSON object
-    return json.dumps(playing_state)
+    return Response(json.dumps(playing_state), mimetype='application/json')
 
 @api.route('/control/next', methods=['POST'])
 def next_song():
@@ -129,9 +129,9 @@ def next_song():
     try:
         player.Next()
 
-        return json.dumps({"success": True}), 201
+        return Response(json.dumps({"success": True}), mimetype='application/json', status=201)
     except:
-        return json.dumps({"success": False}), 502
+        return Response(json.dumps({"success": False}), mimetype='application/json', status=502)
 
 @api.route('/control/previous', methods=['POST'])
 def previous_song():
@@ -140,9 +140,9 @@ def previous_song():
     try:
         player.Previous()
 
-        return json.dumps({"success": True}), 201
+        return Response(json.dumps({"success": True}), mimetype='application/json', status=201)
     except:
-        return json.dumps({"success": False}), 502
+        return Response(json.dumps({"success": False}), mimetype='application/json', status=502)
 
 @api.route('/control/play', methods=['POST'])
 def resume_song():
@@ -151,9 +151,9 @@ def resume_song():
     try:
         player.Play()
 
-        return json.dumps({"success": True}), 201
+        return Response(json.dumps({"success": True}), mimetype='application/json', status=201)
     except:
-        return json.dumps({"success": False}), 502
+        return Response(json.dumps({"success": False}), mimetype='application/json', status=502)
 
 @api.route('/control/pause', methods=['POST'])
 def pause_song():
@@ -162,9 +162,9 @@ def pause_song():
     try:
         player.Pause()
 
-        return json.dumps({"success": True}), 201
+        return Response(json.dumps({"success": True}), mimetype='application/json', status=201)
     except:
-        return json.dumps({"success": False}), 502
+        return Response(json.dumps({"success": False}), mimetype='application/json', status=502)
 
 @api.route('/control/playpause', methods=['POST'])
 def playpause_song():
@@ -173,9 +173,9 @@ def playpause_song():
     try:
         player.PlayPause()
 
-        return json.dumps({"success": True}), 201
+        return Response(json.dumps({"success": True}), mimetype='application/json', status=201)
     except:
-        return json.dumps({"success": False}), 502
+        return Response(json.dumps({"success": False}), mimetype='application/json', status=502)
 
 # Initialize API on host 0.0.0.0 and port 5175
 # If you want to debug using Flask, edit the config file
