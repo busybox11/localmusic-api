@@ -16,6 +16,9 @@ It only works with Linux (dbus' MPRIS) for now, but a Win32 compatibility is to 
 
 The webserver will now be available at the local address (e.g. `localhost`, `127.0.0.1`) with the port `5175` by default.
 
+## Todo
+See https://github.com/busybox11/localmusic-api/projects/1.
+
 ## Endpoints
 ### `GET /api_info`
 Returns the API information in a JSON element similar to this one:
