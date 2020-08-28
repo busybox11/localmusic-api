@@ -7,6 +7,7 @@ python3
 subprocess
 Flask
 mpris2
+dbus
 ```
 
 ## How to use?
